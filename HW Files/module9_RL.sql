@@ -133,18 +133,55 @@ JOIN Departments b
 	ON d.Dept_No = b.Dept_No;
 
 -- List the department number for each employee along with that employee’s employee number, last name, first name, and department name.
+SELECT e.Emp_No, e.First_Name, e.Last_Name, b.Dept_No, b.Dept_Name
+FROM Employees e
+INNER JOIN Dept_Emp d
+	ON e.Emp_No = d.Emp_No
+JOIN Departments b
+	ON d.Dept_No = b.Dept_No;
 
 
 -- List first name, last name, and sex of each employee whose first name is Hercules and whose last name begins with the letter B.
+SELECT e.First_Name, e.Last_Name, e.Sex
+FROM Employees e
+WHERE e.First_Name = 'Hercules' AND e.Last_Name LIKE 'B%'; 
 
 
 -- List each employee in the Sales department, including their employee number, last name, and first name.
+SELECT e.Emp_No, e.First_Name, e.Last_Name, b.Dept_Name
+FROM Employees e
+INNER JOIN Dept_Emp d
+	ON e.Emp_No = d.Emp_No
+JOIN Departments b
+	ON d.Dept_No = b.Dept_No
+WHERE b.Dept_Name = 'Sales'; 
 
 
 -- List each employee in the Sales and Development departments, including their employee number, last name, first name, and department name.
 
+SELECT e.Emp_No, e.First_Name, e.Last_Name, b.Dept_Name
+FROM Employees e
+INNER JOIN Dept_Emp d
+	ON e.Emp_No = d.Emp_No
+JOIN Departments b
+	ON d.Dept_No = b.Dept_No
+WHERE b.Dept_Name = 'Sales'
+
+UNION
+
+SELECT e.Emp_No, e.First_Name, e.Last_Name, b.Dept_Name
+FROM Employees e
+INNER JOIN Dept_Emp d
+	ON e.Emp_No = d.Emp_No
+JOIN Departments b
+	ON d.Dept_No = b.Dept_No
+WHERE b.Dept_Name = 'Development'; 
 
 -- List the frequency counts, in descending order, of all the employee last names (that is, how many employees share each last name).
-	
+SELECT * FROM Employees;
 
+SELECT Last_Name, COUNT(Last_Name) AS "Frequency"
+	FROM Employees
+	GROUP BY Last_Name
+ORDER BY "Frequency" DESC;
 
